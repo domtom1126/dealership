@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Vehicle Entry</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="lead text-center">Enter the make and model of the vehicle</h1>
+        <form action="/signup" method="post">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Make</span>
+          </div>
+          <input type="text" class="form-control" name="make"></input>
+        </div>
+        <input type="submit" value="signup">
+
+
+        <form action="/signup" method="post">
+          <div class="form-group">
+            <label for="">Make</label>
+            <input type="text" name="make" class="form-control" placeholder="Enter Make">
+          </div>
+          <div class="form-group">
+            <label for="">Model</label>
+            <input type="text" name="model" class="form-control" placeholder="Enter Model">
+          </div>
+          <div class="form-group">
+            <label for="">Year</label>
+            <input type="text" name="year" class="form-control" placeholder="Enter Year">
+          </div>
+          <div class="form-group">
+            <label for="">Color</label>
+            <input type="text" name="color" class="form-control" placeholder="Enter Color">
+          </div>
+          <div class="form-group">
+            <label for="">Price</label>
+            <input type="text" name="price" class="form-control" placeholder="Enter Price">
+          </div>
+
+          <button value="signup" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <form action="/view_cars" method="post">
+            <input type="submit" name="view all" value="view_cars">
+        </form>
+    </div>
+
+    </form>
+</body>
+</html>

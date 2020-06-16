@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title></title>
+</head>
+<body>
+  <form method="get">
+    <h1>Vehicle Entry Confirm</h1>
+    <!-- add logic here for vehicle entry NO SUCCESS -->
+    <h3>Vehicle entry <span style="color:green;">SUCCESS</span>!</h3>
+
+    <p>Make: {{make}}</p>
+    <p>Model: {{model}}</p>
+    <p>Year: {{year}}</p>
+    <p>Color: {{color}}</p>
+    <p>Price: {{price}}</p>
+    <button onclick="goBack()">Go Back</button>
+</form>
+<script type="text/javascript">
+    function goBack(){
+        window.history.back();
+    }
+</script>
+</body>
+</html>
