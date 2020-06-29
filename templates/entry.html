@@ -12,10 +12,14 @@
 
     <p>Make: {{make}}</p>
     <p>Model: {{model}}</p>
+    <p>{{make}}</p>
     <p>Year: {{year}}</p>
     <p>Color: {{color}}</p>
     <p>Price: {{price}}</p>
     <button onclick="goBack()">Go Back</button>
+    <form action="/view_cars" method="post">
+        <button  type="submit" class="btn btn-primary">View All</button>
+    </form>
 </form>
 <script type="text/javascript">
     function goBack(){
