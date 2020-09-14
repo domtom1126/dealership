@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="static/global.css">
     <title>Viewing All Cars</title>
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
+    <!-- Displays the entire database -->
+    <table border="1">
+        {% for row in display %}
+        <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
         {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}    <p>{{display}}</p>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/dashboard">Go back</a></p>
 </body>
 </html>

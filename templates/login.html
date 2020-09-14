@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+      
+    <link rel="stylesheet" href="static/global.css">
+    <link rel="stylesheet" href="static/login.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>Employee Login</title>
+    <meta charset="UTF-8">
+    <title>Login Here</title>
 </head>
 <body>
-    <h1 class="display-4">Employee Login</h1>
-    <form action="/clock_in" method="post">
-        <div class="form-group">
-          <label for="">Employee ID</label>
-          <input type="text" name="emp_ID" class="form-control" placeholder="Employee ID">
-        </div>
-        <button value="clock_in" type="submit" class="btn btn-primary">Clock In</button>
+    <div class="container jumbotron">
+        <h1 class="display-4 text-center">Login Here</h1>
+        <br>
+        <form action="" method="post">
+            <div class="text-center">
+                <input type="text" placeholder="Username" name="new_username" value="{{ request.form.new_username }}">
+                <input id="myInput" type="password" placeholder="Password" name="new_password" value="{{ request.form.new_password }}">
+                <input type="checkbox" onclick="myFunction()" name=""> Show Password
+                <input class="btn btn-default" type="submit" value="login" >
+            </div>
+        </form>
+        <form action="/register" method="get">
+            <input type="submit" name="" value="New User Login">
+        </form>
 
-        <button value="view_past" type="submit" class="btn btn-primary">View Past Punches</button>
-    </form>
 
 
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+    </div>
+    <script type="text/javascript">
+        function myFunction() {
+          var x = document.getElementById("myInput");
+          if (x.type === "password") {
+            x.type = "text";
+          } else {
+            x.type = "password";
+          }
+        }
+    </script>
 </body>
 </html>
