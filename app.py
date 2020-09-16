@@ -81,9 +81,12 @@ def view_cars():
     con = sql.connect('vehicle_entry.db')
     c = con.cursor()
     c.execute("SELECT * FROM vehicle_entry")
-    display = c.fetchall()
+    make = c.execute("SELECT make FROM vehicle_entry")
+    # model = c.execute("SELECT model FROM vehicle_entry")
+    display_make = make.fetchall()
+    # display_model = model.fetchall()
 
-    return render_template('view_cars.html', display=display)
+    return render_template('view_cars.html', display_make = display_make)
 
 
 if __name__ == '__main__':

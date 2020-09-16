@@ -1,20 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/global.css">
     <title>Viewing All Cars</title>
 </head>
 <body>
     <!-- Displays the entire database -->
-    <table border="1">
-        {% for row in display %}
-        <tr>
-        {% for d in row %}
-            <td>{{ d }}</td>
-        {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+    <h1 class="display-4">Cars Available on Lot</h1>
+    <!-- ADD FORM HERE FOR SEARCH OF INVENTORY -->
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Make</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                {% for make in display_make %}
+                    <option>{{make}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+    <!-- <form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Model</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+            {% for model in display_model %}
+                <option>{{model}}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </form> -->
+    
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Sort by Make</label>
+          <select multiple class="form-control" id="exampleFormControlSelect2">
+            
+            <option>
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Example textarea</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </form>
+    </div>
     <p><a href="/dashboard">Go back</a></p>
 </body>
 </html>
