@@ -14,8 +14,7 @@ class Vehicle(db.Model):
     color = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Integer())
 
-con = sql.connect('./vehicle_entry.db')
-con.execute('CREATE TABLE IF NOT EXISTS userbase(username TEXT PRIMARY KEY, password TEXT)')
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -28,29 +27,22 @@ def login():
             return redirect(url_for('dashboard'))
     return render_template('login.html', error=error)
 
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
-        new_username = request.form['new_username']
-        new_password = request.form['new_password']
-        
-        con = sql.connect('vehicle_entry.db')
-        c = con.cursor()
-
-        c.execute('INSERT INTO userbase (new_username, new_password) VALUES (?,?)', (new_username, new_password))
-
-        con.commit()
-        con.close()
-        
-        return redirect(url_for('dashboard', new_username = new_username, new_password =new_password))
-    else:
-        return render_template('register.html')
-        
     return render_template('register.html')
 
-@app.route('/dashboard', methods=['GET','POST'])
-def dashboard():
-    return render_template('dashboard.html')
+
+@app.route('/dashboard', methods=['POST','GET'])
+def dashboard(new_username=None, new_password=None):
+    new_username = request.form['new_username']
+    new_password = request.form['new_password']
+    con = sql.connect('new_userbase.db')
+    c = con.cursor()
+    c.execute('INSERT INTO new_userbase (new_username, new_password) VALUES (?,?)', (new_username, new_password))
+    con.commit()
+    con.close()
+    return render_template('dashboard.html', new_username = new_username, new_password = new_password)
 
 @app.route('/add_car')
 def add_car():
@@ -67,11 +59,11 @@ def vehicle_entry(make=None, model=None, year=None, color=None, price=None):
 
     con = sql.connect('vehicle_entry.db')
     c = con.cursor()
-
     c.execute("INSERT INTO vehicle_entry (make, model, year, color, price) VALUES (?,?,?,?,?)",
               (make, model, year, color, price))
     con.commit()
     con.close()
+
     print(make, model)
     return (render_template('entry.html', model=model, make=make, year=year, color=color, price=price))
 
@@ -80,13 +72,26 @@ def vehicle_entry(make=None, model=None, year=None, color=None, price=None):
 def view_cars():
     con = sql.connect('vehicle_entry.db')
     c = con.cursor()
-    c.execute("SELECT * FROM vehicle_entry")
     make = c.execute("SELECT make FROM vehicle_entry")
     # model = c.execute("SELECT model FROM vehicle_entry")
     display_make = make.fetchall()
     # display_model = model.fetchall()
 
     return render_template('view_cars.html', display_make = display_make)
+
+@app.route('/model', methods=['POST', 'GET'])
+def model():
+    con = sql.connect('vehicle_entry.db')
+    c = con.cursor()
+    model = c.execute("SELECT model FROM vehicle_entry")
+    display_model = model.fetchall()
+    c.close()
+    con = sql.connect('vehicle_entry.db')
+    c = con.cursor()
+    make = c.execute('SELECT make FROM vehicle_entry')
+    display_make = make.fetchall()
+
+    return render_template('view_cars.html', display_model = display_model)
 
 
 if __name__ == '__main__':
