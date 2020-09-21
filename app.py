@@ -17,14 +17,14 @@ class Vehicle(db.Model):
 
 
 
-@app.route('/', methods=['GET', 'POST'])
-def login():
+@app.route('/', methods=['POST', 'GET'])
+def login(username=None, password=None):
     error = None
     if request.method == 'POST':
-        if request.form['new_username'] != 'root' or request.form['new_password'] != 'toor':
+        if request.form['username'] != 'root' or request.form['password'] != 'toor':
             error = 'Wrong user or pass'
         else:
-            return redirect(url_for('dashboard'))
+            return render_template('dashboard.html', username = username, password = password)
     return render_template('login.html', error=error)
 
 
@@ -32,17 +32,24 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/new_register', methods=['POST', 'GET'])
+def new_register(username=None, password=None):
+    if request.method == 'POST':
+        new_username = request.form['new_username']
+        new_password = request.form['new_password']
+        con = sql.connect('new_userbase.db')
+        c = con.cursor()
+        c.execute('INSERT INTO new_userbase (new_username, new_password) VALUES (?,?)', (new_username, new_password))
+        con.commit()
+        con.close()
+        
+
+
+
 
 @app.route('/dashboard', methods=['POST','GET'])
-def dashboard(new_username=None, new_password=None):
-    new_username = request.form['new_username']
-    new_password = request.form['new_password']
-    con = sql.connect('new_userbase.db')
-    c = con.cursor()
-    c.execute('INSERT INTO new_userbase (new_username, new_password) VALUES (?,?)', (new_username, new_password))
-    con.commit()
-    con.close()
-    return render_template('dashboard.html', new_username = new_username, new_password = new_password)
+def dashboard():
+    return render_template('dashboard.html')
 
 @app.route('/add_car')
 def add_car():
